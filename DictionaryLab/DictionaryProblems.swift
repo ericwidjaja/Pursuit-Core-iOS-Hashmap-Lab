@@ -3,19 +3,72 @@ import Foundation
 // Find the most frequently occurring character in a given string
 
 func mostFrequentlyOccurringChar(in str: String) -> Character {
-    return "a"
+    
+    var mostFrequentChar = [Character:Int]()
+        
+    for b in str {
+        if let mostFreq = mostFrequentChar[b] {
+            mostFrequentChar[b] = mostFreq + 1
+            
+        } else {
+            mostFrequentChar[b] = 1
+        }
+    }
+    var mostCounted = 0
+    var result = Character(" ")
+    for (k,v) in mostFrequentChar {
+        if mostCounted < v {
+            result = k
+            mostCounted = v
+        }
+    }
+    return result
 }
 
 // Find the first indicies whose values sum to a given number
 
 func pairSum(arr: [Int], target: Int) -> (Int, Int) {
-    return (0, 0)
+    
+    var pair: [Int : Int] = [:]
+    
+    for (a, b) in arr.enumerated() {
+        if let index = pair[target - b]{
+            return (index, a)
+        }
+        pair[b] = a
+    }
+    return (0,0)
 }
+
 
 // Find the second most frequently occurring character in a given string
 
 func secondMostFrequentlyOccurringChar(in str: String) -> Character {
-    return "b"
+    
+    
+    
+    let secondMostFreq = mostFrequentlyOccurringChar(in: str)
+    var mostFrequentChar = [Character:Int]()
+            
+        for b in str {
+            if let mostFreq = mostFrequentChar[b] {
+                mostFrequentChar[b] = mostFreq + 1
+                
+            } else {
+                mostFrequentChar[b] = 1
+            }
+        }
+        var secondMostCounted = 0
+        var result = Character(" ")
+        for (character,integer) in mostFrequentChar {
+            if character == secondMostFreq {
+                continue }
+            if secondMostCounted < integer {
+                result = character
+                secondMostCounted = integer
+            }
+        }
+        return result
 }
 
 // https://leetcode.com/problems/ransom-note/
